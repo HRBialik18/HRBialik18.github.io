@@ -1,181 +1,363 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hannah Bialik - Projects</title>
-    <style>
-        /* Basic styling for the body, header, menu, and content */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-            color: #333;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects — Hannah Bialik</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Karla:wght@300;400;500&display=swap" rel="stylesheet">
 
-        /* Styling for the header */
-        header {
-            background-color: #628f8d;
-            color: #fff;
-            padding: 10px 0;
-            text-align: center;
-            position: fixed;
-            width: 100%;
-            top: 0;
-        }
+  <style>
+    :root {
+      --white: #faf9f7;
+      --ink: #1a1916;
+      --mid: #6b6860;
+      --rule: #e2e0db;
+      --accent: #b85c38;
+    }
 
-        /* Styling for the navigation menu */
-        nav {
-            display: flex;
-            justify-content: center;
-        }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-        /* Styling for the menu links */
-        nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-        }
+    html { scroll-behavior: smooth; }
 
-        /* Additional styling for each menu item */
-        nav ul li {
-            margin: 0 15px;
-        }
+    body {
+      background: var(--white);
+      color: var(--ink);
+      font-family: 'Karla', sans-serif;
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
 
-        /* Styling for the menu links */
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-        }
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 50;
+      background: var(--white);
+      border-bottom: 1px solid var(--rule);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 3rem;
+      height: 56px;
+    }
 
-        /* Highlight menu links on hover */
-        nav ul li a:hover {
-            text-decoration: underline;
-        }
+    .nav-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-size: 1.05rem;
+      letter-spacing: 0.04em;
+      color: var(--ink);
+      text-decoration: none;
+    }
 
-        /* Styling for the main content area */
-        .container {
-            max-width: 900px;
-            margin: 80px auto; /* Added margin to push content below the fixed header */
-            padding: 20px;
-            background-color: #aad5d8;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
+    .nav-links {
+      display: flex;
+      gap: 2.2rem;
+      list-style: none;
+    }
 
-        /* Styling for the projects grid */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin-top: 20px;
-        }
+    .nav-links a {
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--mid);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
 
-        /* Styling for each project box */
-        .project-box {
-            background-color: #fff;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
+    .nav-links a:hover { color: var(--ink); }
+    .nav-links a.active { color: var(--ink); }
 
-        .project-box img {
-            width: 250px;
-            height: 250px;
-            object-fit: cover;
-            margin-bottom: 10px;
-            border-radius: 10px;
-        }
+    /* ── PAGE WRAPPER ── */
+    .page {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
 
-        .project-box a {
-            text-decoration: none;
-            color: inherit;
-            display: block;
-            padding: 20px;
-        }
+    /* ── PAGE HEADER ── */
+    .page-header {
+      padding-top: 120px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid var(--rule);
+      opacity: 0;
+      animation: up 0.6s 0.1s ease forwards;
+    }
 
-        .project-box:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
+    .page-eyebrow {
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 0.8rem;
+    }
 
-        .project-title {
-            font-size: 1.2em;
-            font-weight: bold;
-            margin-top: 5px;
-            margin-bottom: 5px;
-        }
-    </style>
+    .page-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(2.4rem, 4.5vw, 3.4rem);
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+    }
+
+    .page-title em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    /* ── PROJECT LIST ── */
+    .project-list {
+      padding-bottom: 80px;
+    }
+
+    .project-item {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 2.4rem;
+      padding: 2.4rem 0;
+      border-bottom: 1px solid var(--rule);
+      text-decoration: none;
+      color: inherit;
+      align-items: start;
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .project-item.visible { opacity: 1; transform: none; }
+
+    .project-thumb {
+      width: 100%;
+      aspect-ratio: 4/5;
+      object-fit: cover;
+      display: block;
+      filter: grayscale(15%);
+      transition: filter 0.3s ease;
+    }
+
+    .project-item:hover .project-thumb {
+      filter: grayscale(0%);
+    }
+
+    .project-body {
+      padding-top: 0.2rem;
+    }
+
+    .project-category {
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 0.5rem;
+    }
+
+    .project-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-size: 1.3rem;
+      line-height: 1.25;
+      margin-bottom: 0.8rem;
+      transition: color 0.2s;
+    }
+
+    .project-item:hover .project-title { color: var(--accent); }
+
+    .project-desc {
+      font-size: 0.88rem;
+      color: var(--mid);
+      line-height: 1.75;
+      margin-bottom: 1.2rem;
+    }
+
+    .project-link {
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink);
+      border-bottom: 1px solid var(--ink);
+      padding-bottom: 1px;
+      display: inline-block;
+      transition: color 0.2s, border-color 0.2s;
+      text-decoration: none;
+    }
+
+    .project-links {
+      display: flex;
+      gap: 1.2rem;
+    }
+
+    .project-item:hover .project-link {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
+    /* ── FOOTER ── */
+    .footer {
+      border-top: 1px solid var(--rule);
+      padding: 48px 0 56px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-copy {
+      font-size: 0.78rem;
+      color: var(--mid);
+      letter-spacing: 0.04em;
+    }
+
+    .footer-contact {
+      display: flex;
+      gap: 1.6rem;
+    }
+
+    .footer-contact a {
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--mid);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-contact a:hover { color: var(--ink); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes up {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      nav { padding: 0 1.25rem; }
+      .page { padding: 0 1.25rem; }
+      .project-item { grid-template-columns: 120px 1fr; gap: 1.2rem; }
+      .footer { flex-direction: column; gap: 1.2rem; align-items: flex-start; }
+    }
+  </style>
 </head>
 
 <body>
-    <!-- Header section with navigation -->
-    <header>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="projects.html">Projects</a></li>
-                <li><a href="https://docs.google.com/document/d/1PzJo3owXfXfcasBDC2Z4_FbekPAqleFZ_5twugjrdYo/edit?usp=sharing">Resume</a></li>
-            </ul>
-        </nav>
-    </header>
+  <nav>
+    <a href="index.html" class="nav-name">Hannah Bialik</a>
+    <ul class="nav-links">
+      <li><a href="projects.html" class="active">Projects</a></li>
+      <li><a href="resume.html" >Résumé</a></li>
+    </ul>
+  </nav>
 
-    <!-- Main content area for projects -->
-    <div class="container">
-        <h1>My Projects</h1>
-        <p>Here are some of the projects I have worked on.</p>
-        
-        <!-- Projects grid -->
-        <div class="projects-grid">
-            <div class="project-box">
-                <a href="project pages/drt.html">
-                    <img src="pictures/DRT Poster.png" alt="DRT Testing">
-                    <div class="project-title">Data Retention Time Testing</div>
-                    <div class="body">Tested the data retention time of gain cell embedded dynamic random access memory.</div>
-                </a>
-            </div>
-            <div class="project-box">
-                <a href="https://github.com/MSchmidtRU/RU_CollegePlanner">
-                    <img src="pictures/MAPS.png" alt="SwyperTheBox">
-                    <div class="project-title">My Academic Planning System (MAPS)</div>
-                    <div class="body">Website to plan your university academic journey.</div>
-                </a>
-            </div>
-            <div class="project-box">
-                <a href="https://github.com/HRBialik18/Gambit2.0">
-                    <img src="pictures/gambit.png" alt="King's Gambit 2.0">
-                    <div class="project-title">King's Gambit 2.0</div>
-                    <div class="body">Chess playing robot.</div>
-                </a>
-            </div>
-            <div class="project-box">
-                <a href="project1.html">
-                    <img src="pictures/swyper.png" alt="SwyperTheBox">
-                    <div class="project-title">SwyperTheBox</div>
-                    <div class="body">Device that automatically accepts mail packages into the house.</div>
-                </a>
-            </div>
-            <div class="project-box">
-                <a href="https://drive.google.com/drive/folders/1u6GP8Wkv2az767z63RfNtvJ3uZA2edOx?usp=sharing">
-                    <img src="pictures/dronetransmitter.JPG" alt="Drone Transmitter">
-                    <div class="project-title">Drone Transmitter</div>
-                    <div class="body">Connects to Beta65S Lite Micro Whoop Quadcopter V2</div>
-                </a>
-            </div>
-            <!-- <div class="project-box">
-                <a href="project5.html">
-                    <img src="project5.jpg" alt="Project 5">
-                    <div class="project-title">Project 5</div>
-                </a>
-            </div> -->
-        </div>
+  <div class="page">
+
+    <div class="page-header">
+      <p class="page-eyebrow">Selected Work</p>
+      <h1 class="page-title">Projects &amp;<br><em>Builds</em></h1>
     </div>
-</body>
 
+    <div class="project-list">
+
+      <div class="project-item">
+        <img class="project-thumb" src="pictures/capstone_prototype.jpeg" alt="SIFT">
+        <div class="project-body">
+          <p class="project-category">Computer Vision</p>
+          <h2 class="project-title">Smart Inspection for Fastener Testing (SIFT)</h2>
+          <p class="project-desc">A device that automatically inspects metal nuts for defects using computer vision and machine learning techniques. This group project was sponsered by P&R Fasteners Inc. and was developed as part of the Rutgers ECE capstone design course.</p>
+          <div class="project-links">
+            <a class="project-link" href="https://colab.research.google.com/drive/1vHiLS5AqtW2OWloksZcv6FZPgABdGNVK?usp=sharing" target="_blank">View in Google Colab →</a>
+            <!-- <a class="project-link" href="pictures/SIFT_Final_Report.pdf" target="_blank">View Final Report →</a> -->
+          </div>
+        </div>
+      </div>
+
+
+      <div class="project-item">
+        <img class="project-thumb" src="pictures/gambit.png" alt="King's Gambit 2.0">
+        <div class="project-body">
+          <p class="project-category">Robotics & Computer Vision</p>
+          <h2 class="project-title">King's Gambit 2.0</h2>
+          <p class="project-desc">A chess-playing robot that uses computer vision to detect board state and a decision engine to select and execute moves with a robotic arm. This group project was chosen to present at the Rutgers Honors Engineering Symposium in 2024.</p>
+          <div class="project-links">
+            <a class="project-link" href="https://github.com/HRBialik18/Gambit2.0" target="_blank">View on GitHub →</a>
+            <a class="project-link" href="https://drive.google.com/file/d/1Tai7A8m-olEU7LwCFi-Fn59TbuhEps7l/view?usp=sharing" target="_blank">View Demo →</a>
+          </div>
+        </div>
+      </div>
+
+      <a class="project-item" href="https://github.com/MSchmidtRU/RU_CollegePlanner" target="_blank">
+        <img class="project-thumb" src="pictures/MAPS.png" alt="My Academic Planning System">
+        <div class="project-body">
+          <p class="project-category">Web / Full-Stack</p>
+          <h2 class="project-title">My Academic Planning System (MAPS)</h2>
+          <p class="project-desc">A web application to help university students plan their academic journey — mapping out courses, requirements, and scheduling across semesters.</p>
+          <span class="project-link">View on GitHub →</span>
+        </div>
+      </a>
+
+      <div class="project-item">
+        <img class="project-thumb" src="pictures/DRT Poster.png" alt="Data Retention Time Testing">
+        <div class="project-body">
+          <p class="project-category">Memory Systems</p>
+          <h2 class="project-title">Data Retention Time Testing</h2>
+          <p class="project-desc">Tested the data retention time of gain cell embedded dynamic random access memory (GC-eDRAM), characterizing how long cells reliably hold a written value under varying conditions. This research was done as part of the Bar-Ilan University-Yeshiva University Summer Science Research Internship.</p>
+          <div class="project-links">
+            <a class="project-link" href="pictures/BIU Final Research Poster.png" target="_blank">View Poster →</a>
+            <a class="project-link" href="pictures/BIU Abstract.pdf" target="_blank">View Abstract →</a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="project-item">
+        <img class="project-thumb" src="pictures/swyper.png" alt="SwyperTheBox">
+        <div class="project-body">
+          <p class="project-category">Embedded Systems</p>
+          <h2 class="project-title">SwyperTheBox</h2>
+          <p class="project-desc">A device that automatically accepts mail packages at the door — handling detection, actuation, and confirmation without any manual interaction. This group project was chosen to present at the Rutgers Honors Engineering Symposium in 2023.</p>
+          <div class="project-links">
+            <a class="project-link" href="https://drive.google.com/file/d/1P3pSo3txwH-iYrQEK6SdRgSLJ546SpjN/view?usp=sharing" target="_blank">View Demo →</a>
+          </div>
+        </div>
+      </div>
+
+      <a class="project-item" href="https://drive.google.com/drive/folders/1u6GP8Wkv2az767z63RfNtvJ3uZA2edOx?usp=sharing" target="_blank">
+        <img class="project-thumb" src="pictures/dronetransmitter.JPG" alt="Drone Transmitter">
+        <div class="project-body">
+          <p class="project-category">Hardware / RF</p>
+          <h2 class="project-title">Drone Transmitter</h2>
+          <p class="project-desc">A custom radio transmitter designed to interface with the Beta65S Lite Micro Whoop Quadcopter V2, built from scratch to explore RF communication and drone control protocols.</p>
+          <span class="project-link">View Images →</span>
+        </div>
+      </a>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <span class="footer-copy">© 2025 Hannah Bialik</span>
+      <div class="footer-contact">
+        <a href="mailto:hannahbialik@email.com">Email</a>
+        <a href="https://www.linkedin.com/in/hannah-bialik-aa183a252/" target="_blank">LinkedIn</a>
+      </div>
+    </footer>
+
+  </div>
+
+  <script>
+    const items = document.querySelectorAll('.project-item');
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          const siblings = [...e.target.parentElement.querySelectorAll('.project-item')];
+          const idx = siblings.indexOf(e.target);
+          setTimeout(() => e.target.classList.add('visible'), idx * 70);
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    items.forEach(el => obs.observe(el));
+  </script>
+
+</body>
 </html>

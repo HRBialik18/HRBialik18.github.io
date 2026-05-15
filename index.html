@@ -1,114 +1,353 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hannah Bialik - Home</title>
-    <style>
-        /* Basic styling for the body, header, menu, and content */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-            color: #333;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hannah Bialik</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Karla:wght@300;400;500&display=swap" rel="stylesheet">
 
-        /* Styling for the header */
-        header {
-            background-color: #628f8d;
-            color: #fff;
-            padding: 10px 0;
-            text-align: center;
-            position: fixed;
-            width: 100%;
-            top: 0;
-        }
+  <style>
+    :root {
+      --white: #faf9f7;
+      --ink: #1a1916;
+      --mid: #6b6860;
+      --rule: #e2e0db;
+      --accent: #b85c38;
+    }
 
-        /* Styling for the navigation menu */
-        nav {
-            display: flex;
-            justify-content: center;
-        }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-        /* Styling for the menu links */
-        nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-        }
+    html { scroll-behavior: smooth; }
 
-        /* Additional styling for each menu item */
-        nav ul li {
-            margin: 0 15px;
-        }
+    body {
+      background: var(--white);
+      color: var(--ink);
+      font-family: 'Karla', sans-serif;
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
 
-        /* Styling for the menu links */
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-        }
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 50;
+      background: var(--white);
+      border-bottom: 1px solid var(--rule);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 3rem;
+      height: 56px;
+    }
 
-        /* Highlight menu links on hover */
-        nav ul li a:hover {
-            text-decoration: underline;
-        }
+    .nav-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-size: 1.05rem;
+      letter-spacing: 0.04em;
+      color: var(--ink);
+      text-decoration: none;
+    }
 
-        /* Styling for the main content area */
-        .container {
-            max-width: 900px;
-            margin: 80px auto; /* Added margin to push content below the fixed header */
-            padding: 20px;
-            background-color: #aad5d8;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
+    .nav-links {
+      display: flex;
+      gap: 2.2rem;
+      list-style: none;
+    }
 
-        /* Styling for the profile image */
-        .profile-image {
-            width: 300px;
-            height: 300px;
-            border-radius: 10%;
-            object-fit: cover;
-            margin-bottom: 20px;
-        }
+    .nav-links a {
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--mid);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
 
-        /* Styling for the bio section */
-        .bio {
-            text-align: left;
-            margin-top: 20px;
-        }
-    </style>
+    .nav-links a:hover { color: var(--ink); }
+
+    /* ── WRAPPER ── */
+    .page {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      padding-top: 100px;
+      padding-bottom: 32px;
+      display: grid;
+      grid-template-columns: 1fr 180px;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .hero-greeting {
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 1.2rem;
+      opacity: 0;
+      animation: up 0.6s 0.1s ease forwards;
+    }
+
+    .hero-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(2.8rem, 5vw, 4rem);
+      line-height: 1.08;
+      letter-spacing: -0.01em;
+      margin-bottom: 1.6rem;
+      opacity: 0;
+      animation: up 0.6s 0.2s ease forwards;
+    }
+
+    .hero-name em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .hero-bio {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: var(--mid);
+      max-width: 440px;
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: up 0.6s 0.35s ease forwards;
+    }
+
+    .hero-links {
+      display: flex;
+      gap: 1.6rem;
+      opacity: 0;
+      animation: up 0.6s 0.5s ease forwards;
+    }
+
+    .hero-links a {
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 1px solid var(--ink);
+      padding-bottom: 1px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .hero-links a:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
+    /* ── PHOTO ── */
+    .hero-photo-wrap {
+      opacity: 0;
+      animation: fadeIn 0.8s 0.3s ease forwards;
+    }
+
+    .hero-photo-wrap img {
+      width: 120%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      object-position: 50% 35%;
+      display: block;
+      filter: grayscale(8%);
+    }
+
+    /* ── RULE ── */
+    hr {
+      border: none;
+      border-top: 1px solid var(--rule);
+      margin: 0;
+    }
+
+    /* ── SECTION ── */
+    .section {
+      padding: 32px 0;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .section-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 1rem;
+    }
+
+    /* ── ABOUT ── */
+    .about-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(1.2rem, 2.2vw, 1.5rem);
+      line-height: 1.5;
+      color: var(--ink);
+    }
+
+    .about-text em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    /* ── FOCUS AREAS ── */
+    .focus-item {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 2rem;
+      padding: 1.4rem 0;
+      border-bottom: 1px solid var(--rule);
+      align-items: baseline;
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .focus-item:first-child { border-top: 1px solid var(--rule); }
+    .focus-item.visible { opacity: 1; transform: none; }
+
+    .focus-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 400;
+      letter-spacing: 0.01em;
+    }
+
+    .focus-desc {
+      font-size: 0.88rem;
+      color: var(--mid);
+      line-height: 1.7;
+    }
+
+    /* ── FOOTER ── */
+    .footer {
+      padding: 32px 0 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-copy {
+      font-size: 0.78rem;
+      color: var(--mid);
+      letter-spacing: 0.04em;
+    }
+
+    .footer-contact {
+      display: flex;
+      gap: 1.6rem;
+    }
+
+    .footer-contact a {
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--mid);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-contact a:hover { color: var(--ink); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes up {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      nav { padding: 0 1.25rem; }
+      .page { padding: 0 1.25rem; }
+      .hero {
+        grid-template-columns: 1fr;
+        padding-top: 96px;
+        padding-bottom: 56px;
+      }
+      .hero-photo-wrap { max-width: 160px; }
+      .focus-item { grid-template-columns: 1fr; gap: 0.3rem; }
+      .footer { flex-direction: column; gap: 1.2rem; align-items: flex-start; }
+    }
+  </style>
 </head>
 
 <body>
-    <!-- Header section with navigation -->
-    <header>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="projects.html">Projects</a></li>
-                <li><a href="https://docs.google.com/document/d/1PzJo3owXfXfcasBDC2Z4_FbekPAqleFZ_5twugjrdYo/edit?usp=sharingf">Resume</a></li>
-            </ul>
-        </nav>
-    </header>
 
-    <!-- Main content area -->
-    <div class="container">
-        <!-- Profile image -->
-        <img src="pictures/Yet Another Headshot.JPG" alt="Hannah Bialik" class="profile-image" style="object-position: 50% 35%">
-        <!-- Bio section -->
-        <div class="bio">
-            <h1>Hello, I'm  Hannah Bialik</h1>
-            <p>
-                I'm a computer engineering student with a passion for software development, embedded systems, and machine learning. I love working on projects that challenge me to learn new skills and apply my knowledge in creative ways. Feel free to explore my portfolio and get in touch if you'd like to collaborate!
-            </p>
+  <nav>
+    <a href="index.html" class="nav-name">Hannah Bialik</a>
+    <ul class="nav-links">
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="resume.html">Résumé</a></li>
+    </ul>
+  </nav>
+
+  <div class="page">
+
+    <!-- HERO -->
+    <div class="hero">
+      <div class="hero-text">
+        <p class="hero-greeting">Computer Engineering &amp; CS</p>
+        <h1 class="hero-name">Hannah<br><em>Bialik</em></h1>
+        <p class="hero-bio">
+          AI, Robotics & Computer Vision Enthusiast
+        </p>
+        <div class="hero-links">
+          <a href="projects.html">Projects</a>
+          <a href="resume.html">Résumé</a>
+          <a href="mailto:hannahbialik@gmail.com">Contact</a>
         </div>
+      </div>
+      <div class="hero-photo-wrap">
+        <img src="pictures/Yet Another Headshot.JPG" alt="Hannah Bialik">
+      </div>
     </div>
-</body>
 
+    <hr>
+
+    <!-- ABOUT -->
+    <div class="section">
+      <p class="section-label">About</p>
+      <p class="about-text">
+        Recent Rutgers Honors Academy graduate in Computer Engineering and Computer Science with interests in robotics software, computer vision, machine learning, and intelligent systems. Particularly interested in developing software that converts complex data into perception, reasoning, and autonomous decision-making.
+      </p>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <span class="footer-copy">© 2025 Hannah Bialik</span>
+      <div class="footer-contact">
+        <a href="mailto:hannahbialik@email.com">Email</a>
+        <a href="https://www.linkedin.com/in/hannah-bialik-aa183a252/" target="_blank">LinkedIn</a>
+      </div>
+    </footer>
+
+  </div>
+
+  <script>
+    const items = document.querySelectorAll('.focus-item');
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          const siblings = [...e.target.parentElement.querySelectorAll('.focus-item')];
+          const idx = siblings.indexOf(e.target);
+          setTimeout(() => e.target.classList.add('visible'), idx * 80);
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    items.forEach(el => obs.observe(el));
+  </script>
+
+</body>
 </html>

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Résumé — Hannah Bialik</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Karla:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --white: #faf9f7;
+      --ink: #1a1916;
+      --mid: #6b6860;
+      --rule: #e2e0db;
+      --accent: #b85c38;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--white);
+      color: var(--ink);
+      font-family: 'Karla', sans-serif;
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 50;
+      background: var(--white);
+      border-bottom: 1px solid var(--rule);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 3rem;
+      height: 56px;
+    }
+
+    .nav-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-size: 1.05rem;
+      letter-spacing: 0.04em;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--mid);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--ink); }
+    .nav-links a.active { color: var(--ink); }
+
+    /* ── PAGE WRAPPER ── */
+    .page {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      padding-top: 120px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid var(--rule);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      opacity: 0;
+      animation: up 0.6s 0.1s ease forwards;
+    }
+
+    .page-header-text {}
+
+    .page-eyebrow {
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 0.8rem;
+    }
+
+    .page-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(2.4rem, 4.5vw, 3.4rem);
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+    }
+
+    .page-title em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .download-link {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 1px solid var(--ink);
+      padding-bottom: 1px;
+      white-space: nowrap;
+      margin-bottom: 0.4rem;
+      display: inline-block;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .download-link:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
+    /* ── PDF EMBED ── */
+    .pdf-wrap {
+      padding: 48px 0 80px;
+      opacity: 0;
+      animation: up 0.6s 0.25s ease forwards;
+    }
+
+    .pdf-embed {
+      width: 100%;
+      height: 900px;
+      border: 1px solid var(--rule);
+      display: block;
+    }
+
+    /* fallback message inside the iframe if browser can't render */
+    .pdf-fallback {
+      display: none;
+      padding: 3rem;
+      text-align: center;
+      border: 1px solid var(--rule);
+      color: var(--mid);
+      font-size: 0.9rem;
+      line-height: 1.8;
+    }
+
+    .pdf-fallback a {
+      color: var(--ink);
+      border-bottom: 1px solid var(--ink);
+      text-decoration: none;
+    }
+
+    /* ── FOOTER ── */
+    .footer {
+      border-top: 1px solid var(--rule);
+      padding: 48px 0 56px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-copy {
+      font-size: 0.78rem;
+      color: var(--mid);
+      letter-spacing: 0.04em;
+    }
+
+    .footer-contact {
+      display: flex;
+      gap: 1.6rem;
+    }
+
+    .footer-contact a {
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--mid);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-contact a:hover { color: var(--ink); }
+
+    /* ── ANIMATION ── */
+    @keyframes up {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      nav { padding: 0 1.25rem; }
+      .page { padding: 0 1.25rem; }
+      .page-header { flex-direction: column; align-items: flex-start; gap: 1.2rem; }
+      .pdf-embed { height: 600px; }
+      .footer { flex-direction: column; gap: 1.2rem; align-items: flex-start; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-name">Hannah Bialik</a>
+    <ul class="nav-links">
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="resume.html">Résumé</a></li>
+    </ul>
+  </nav>
+
+  <div class="page">
+
+    <div class="page-header">
+      <div class="page-header-text">
+        <p class="page-eyebrow">Curriculum Vitae</p>
+        <h1 class="page-title">Résumé</h1>
+      </div>
+      <!-- Update href to your PDF path once added, e.g. "resume.pdf" -->
+      <a class="download-link" href="Hannah Bialik AI Resume.pdf" download>Download PDF ↓</a>
+    </div>
+
+    <div class="pdf-wrap">
+      <!--
+        Replace "resume.pdf" with your actual PDF filename.
+        Place the PDF in the same folder as this HTML file.
+      -->
+      <iframe
+        class="pdf-embed"
+        src="Hannah Bialik AI Resume.pdf"
+        title="Hannah Bialik — Résumé"
+        type="application/pdf"
+      >
+        <!-- Shown if the browser can't render the PDF inline -->
+        <div class="pdf-fallback" style="display:block;">
+          Your browser can't display the PDF inline.
+          <br>
+          <a href="resume.pdf" download>Download it here instead →</a>
+        </div>
+      </iframe>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <span class="footer-copy">© 2025 Hannah Bialik</span>
+      <div class="footer-contact">
+        <a href="mailto:hannahbialik@email.com">Email</a>
+        <a href="https://www.linkedin.com/in/hannah-bialik-aa183a252/" target="_blank">LinkedIn</a>
+      </div>
+    </footer>
+
+  </div>
+
+</body>
+</html>
